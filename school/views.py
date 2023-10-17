@@ -252,8 +252,8 @@ def show_topics(request):
 
 
 def calculate_school_days():
-    #current_date = datetime.now()
-    current_date = datetime(2023, 11, 15)  # Рік, місяць, день
+    current_date = datetime.now()
+    #current_date = datetime(2023, 11, 15)  # Рік, місяць, день для тестування
 
     current_year = current_date.year
     date_start1 = datetime(current_year - 1, 9, 2)  # Рік, місяць, день - для дат до 01.09

@@ -1,0 +1,87 @@
+html, body {
+    background-color: #EEEEEE;
+    overflow: auto; /* Дозволяє прокручувати сторінку, якщо вміст перевищує розмір вікна */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Мінімальна висота вікна браузера */
+    margin: 0;
+}
+
+
+#div-logo {
+  font-size: 24px;
+  font-weight: 300;
+  /* color: lightgray; */
+}
+
+#nav-main {
+  background-color: rgba(246, 148, 22, 1);
+}
+
+#nav-item {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%; /* Розтягнути footer на всю ширину сторінки */
+}
+
+#footer-nav{
+  font-size: 1rem;
+}
+
+/* Breadcrumbs */
+/* Style the list */
+ul.breadcrumb {
+    list-style: none;
+    padding-top: 12px;
+  }
+
+  /* Display list items side by side */
+  ul.breadcrumb li {
+    display: inline;
+    font-size: 1rem;
+  }
+
+  /* Add a slash symbol (/) before/behind each list item */
+  ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+  }
+
+  /* Add a color to all links inside the list */
+  ul.breadcrumb li a {
+    color: #0d6efd;
+    /* text-decoration: underline; */
+    text-decoration: none;
+  }
+
+  /* Add a color on mouse-over */
+  ul.breadcrumb li a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  
+  .container {
+    flex-grow: 1;
+  }
+
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+#index-li {
+  font-size: 1.2rem;
+}

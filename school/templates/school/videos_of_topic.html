@@ -1,0 +1,90 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+ 
+  <div>
+    <!-- Breadcrumbs -->
+    <ul class="breadcrumb">
+      <li><a href="{% url 'grades_of_school' %}">Класи</a></li>
+      <li><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">Предмети</a></li>
+      <li><a href="{% url 'chapters_topics' grade_slug=grade.slug subject_slug=subject.slug %}">Розділи і теми</a></li>
+      <li>Відео до теми</li>
+    </ul>
+  </div>
+
+  <div>
+    <!-- Заголовок сторінки -->
+    <h5><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">
+       {{ grade.title }}</a>
+        - 
+       <a href="{% url 'chapters_topics' grade_slug=grade.slug subject_slug=subject.slug %}">
+        {{ subject.title }}</a>
+    </h5>
+  </div>
+
+
+  <div>
+    <!-- Кнопки для переходу по контенту -->
+    {% include 'school/topic_nav_main.html' %}
+    {% include 'school/topic_nav.html' %} 
+  </div>
+
+  <div>
+    <!-- Контент -->
+    <div id="div-top">
+      <h3> <strong style="font-weight: 400;">  Розділ: {{ chapter.title }} </strong> </h3>
+      <h4> <strong style="font-weight: 700;"> Тема: {{ topic.title }}</strong> </h4>
+      <p style="font-weight: 400;"> {{ topic.description|linebreaksbr|safe }}</p>
+    </div>
+    <div>
+      {% if videos %}
+        {% for video in videos %}
+        <hr>
+           <!-- Блок з назвою відео та самим відео -->
+          <div id="div-bottom">
+              <!-- Блок опису відео -->
+              <strong style="font-weight: 500;"> Назва відео: {{ video.title }}</strong>
+              <div> {{ video.topic_video_desc|linebreaksbr|safe }}
+              </div>
+
+            <!-- Блок самого відео -->
+            <div style="font-weight: 400;" id="div-top">
+              <div class="col-12 d-flex justify-content-between">
+                <div class="col-6 d-flex" id="div-info">Рівень: {{ video.level }} 
+                </div>
+                <div class="col-6 d-flex justify-content-end" id="div-info">
+                  <!-- <div>Рейтинг: {{ video.rating }} (з 12)
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="video-container">
+                <iframe class="responsive-iframe" src="{{ video.link }}" frameborder="10" data-aspect-ratio="16/9" allowfullscreen></iframe>
+              </div>
+                <div> {{ video.description|linebreaksbr|safe}}
+                </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div>
+            <!-- Кнопки для переходу по контенту -->
+            {% include 'school/topic_nav.html' %} 
+          </div>
+
+        {% else %}
+          <p><i>Для цієї теми поки не додано жодного відео.</i></p>
+        {% endif %}
+
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}

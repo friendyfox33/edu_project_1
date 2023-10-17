@@ -1,0 +1,39 @@
+
+#SelectButton {
+  max-width: 240px; /* Встановіть бажану мінімальну ширину */
+  }
+
+#div-top {
+  padding-top: 10px;
+}
+
+#div-bottom {
+  padding-bottom: 20px;
+}
+
+#div-btn {
+  padding: 4px;
+}
+
+#div-info {
+  font-size: 0.9rem;
+}
+
+#div-small {
+  font-size: 0.8rem;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    width: 100%;
+  }
+  
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }

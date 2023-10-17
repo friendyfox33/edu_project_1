@@ -1,0 +1,20 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Класи
+{% endblock %}
+
+
+{% block content %}
+    <br>
+    <h4>Виберіть клас</h4>
+
+    {% for grade in grades %}
+    <div class="container" style="height: 3.5em;">
+        <div class="d-grid gap-2">
+             <a href="{% url 'subjects_of_grade' grade.slug %}" class="btn btn-lg btn-warning" id="SelectButton"> {{ grade.title }} </a>
+         </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+{% block content %}
+    <!-- Breadcrumbs -->
+  <ul class="breadcrumb">
+    <li><a href="{% url 'grades_of_school' %}">Класи</a></li>
+    <li>Предмети</li>
+  </ul>
+
+  <h5> {{ grade.title }}</h5>
+  <p>Виберіть предмет:</p>
+  {% for item in topic_chapter_list %}
+    <div class="container">
+          {% if item.1 and item.2 %}
+            <div style="height: 3.5em;">
+              <a href="{% url 'videos_of_topic' grade_slug=grade.slug subject_slug=item.0.slug chapter_slug=item.1.slug topic_slug=item.2.slug %}" class="btn btn-lg btn-warning col-6" id="SelectButton"> {{ item.0.title }} </a>
+              <a href="{% url 'chapters_topics' grade_slug=grade.slug subject_slug=item.0.slug %}"> <i style="padding-left: 10px;"> До списку тем </i></a>
+            </div>
+            {% endif %}
+    </div>
+  {% endfor %}
+
+{% endblock %}

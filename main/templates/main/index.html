@@ -1,0 +1,28 @@
+{% extends 'main/_layout.html' %}
+
+{% block title %}
+    Головна сторінка
+{% endblock %}
+
+{% block content %}
+    <div class="row" style="height: 4em; padding: 10px;">
+        <div class="col d-flex align-items-center">
+            <blockquote class="blockquote"> Нехай твоє навчання буде легким та цікавим! </blockquote> 
+        </div>
+
+        <div class="container">
+            <ul>
+               <li id="index-li">
+                  <p> <a href="{% url 'grades_of_school' %}">До вибору класу</a> </p>
+               </li>
+   
+               <li id="index-li">
+                <p> <a  href="{% url 'random_topic' %}"> Випадкова тема</a> </p>
+               </li>
+   
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}

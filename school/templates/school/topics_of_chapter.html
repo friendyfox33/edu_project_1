@@ -1,0 +1,45 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+{% block content %}
+    <!-- Breadcrumbs -->
+  <ul class="breadcrumb">
+    <li><a href="{% url 'grades_of_school' %}">Класи</a></li>
+    <li><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">Предмети</a></li>
+    <li><a href="{% url 'chapters_of_course' grade_slug=grade.slug subject_slug=subject.slug %}">Розділи</a></li>
+    <li>Теми розділу</li>
+  </ul>
+
+  <h5><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">{{ grade.title }}</a>
+    - 
+    <a href="{% url 'chapters_of_course' grade_slug=grade.slug subject_slug=subject.slug %}">{{ subject.title }}</a>
+  </h5>
+  <h4> Розділ: {{ chapter.title }}</h4>
+  <p>Виберіть тему:</p>
+  {% for topic in topics %}
+  <ul>
+    <li>
+      <a href="{% url 'videos_of_topic' grade_slug=grade.slug subject_slug=subject.slug chapter_slug=chapter.slug topic_slug=topic.slug %}">
+        {% if topic == topic_current %}
+          <strong>{{ topic.title }}</strong>
+        {% else %}
+          {{ topic.title }}
+        {% endif %}
+      </a>
+    </li>
+  </ul>
+  {% endfor %}
+
+  Поточний розділ: {{ chapter_current.id }}
+  <!-- <p>Поточна тема: {{ topic_current.title }} </p>
+  <p>number_of_days_per_year: {{ number_of_days_per_year }} </p>
+  <p>number_of_days_for_today: {{ number_of_days_for_today }} </p>
+  <p>topics_num: {{ topics_num }} </p>
+  <p>days_per_topic: {{ days_per_topic }} </p>
+  <p>number_of_topic: {{ number_of_topic }} </p> -->
+
+{% endblock %}

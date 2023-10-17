@@ -1,0 +1,33 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+{% block content %}
+    <!-- Breadcrumbs -->
+  <ul class="breadcrumb">
+    <li><a href="{% url 'grades_of_school' %}">Класи</a></li>
+    <li><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}"> Предмети</a></li>
+    <li>Розділи</li>
+  </ul>
+
+  <h5><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">{{ grade.title }}</a>
+    - {{ subject.title }}
+  </h5>
+
+  <div id="div-top">
+  Виберіть розділ:
+  {% for chapter in chapters %}
+  <div id="div-top">
+    <ul>
+      <li>
+          <a href="{% url 'topics_of_chapter' grade_slug=grade.slug subject_slug=subject.slug chapter_slug=chapter.slug %}"> {{ chapter.title }} </a>
+      </li>
+    </ul>
+  </div>
+  {% endfor %}
+  </div>
+
+{% endblock %}

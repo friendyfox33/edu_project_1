@@ -1,0 +1,32 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+
+{% block content %}
+<div>
+    <br>
+    <h3>Всі предмети</h3>
+
+    Активні:
+    <ul>
+        {% for el in subjects %}
+            {% if el.is_active %}
+                <li> {{ el.title }} </li>
+          {% endif %}
+        {% endfor %}
+    </ul>
+
+    Неактивні:
+    <ul>
+        {% for el in subjects %}
+            {% if not el.is_active %}
+              <li> {{ el.title }} </li>
+           {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

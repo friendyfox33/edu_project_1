@@ -1,0 +1,8 @@
+{% extends 'main/_layout.html' %}
+
+<!-- Тут будуть підключені стилі зі статичного файлу для кожного додатку -->
+{% block custom_styles %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'school/css/styles.css' %}">
+    <script src="{% static 'school/js/scripts.js' %}"></script>
+{% endblock %}

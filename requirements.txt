@@ -1,0 +1,5 @@
+Django==4.2.5
+psycopg2==2.9.8
+django-autoslug==1.9.9
+python-slugify==8.0.1
+configparser==6.0.0

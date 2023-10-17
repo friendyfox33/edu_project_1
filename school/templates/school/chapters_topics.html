@@ -1,0 +1,45 @@
+{% extends 'school/_layout.html' %}
+
+{% block title %}
+    Предмети
+{% endblock %}
+
+
+{% block content %}
+    <!-- Breadcrumbs -->
+  <ul class="breadcrumb">
+    <li><a href="{% url 'grades_of_school' %}">Класи</a></li>
+    <li><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}"> Предмети</a></li>
+    <li>Розділи</li>
+  </ul>
+
+  <h5><a href="{% url 'subjects_of_grade' grade_slug=grade.slug %}">{{ grade.title }}</a>
+    - {{ subject.title }}
+  </h5>
+
+  <div id="div-top">
+  Виберіть тему:
+
+  {% for chapter in chapters %}
+  <div id="div-top">
+    <h4>{{ chapter.title }}</h4>
+    <ul>
+        {% for topic in chapter.topic_set.all %}
+            <li>
+              <a href="{% url 'videos_of_topic' grade_slug=grade.slug subject_slug=subject.slug chapter_slug=chapter.slug topic_slug=topic.slug %}">
+                {% if topic == topic_current %}
+                  <strong>{{ chapter.sort_order }}.{{ topic.sort_order }} {{ topic.title }}</strong>
+                {% else %}
+                {{ chapter.sort_order }}.{{ topic.sort_order }} {{ topic.title }}
+                {% endif %}
+              </a>
+              <span id="div-small"> кількість відео: {{ topic.video_exist }}
+              </span>
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

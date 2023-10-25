@@ -22,7 +22,7 @@
 
   {% for chapter in chapters %}
   <div id="div-top">
-    <h4>{{ chapter.title }}</h4>
+    <h4>{{ chapter.sort_order }}. {{ chapter.title }}</h4>
     <ul>
         {% for topic in chapter.topic_set.all %}
             <li>

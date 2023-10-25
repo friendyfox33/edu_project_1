@@ -3,3 +3,4 @@ psycopg2==2.9.8
 django-autoslug==1.9.9
 python-slugify==8.0.1
 configparser==6.0.0
+mysqlclient==2.2.0

@@ -95,14 +95,14 @@ class ChaptersTopicsView(View):
         course = GradeSubject.objects.filter(grade=grade, subject=subject).distinct().first()  # вибраний курс
 
         chapters = Chapter.objects.filter(course=course, is_active=True).order_by('sort_order')
-        topics = Topic.objects.filter(chapter__in=chapters, is_active=True).order_by('sort_order_full')
+        topics = Topic.objects.filter(chapter__in=chapters, is_active=True).order_by('sort_order_full_dec')
         # print(f'Список тем: {topics}')
 
         # chapters = chapters.prefetch_related(
-        #     Prefetch('topic_set', queryset=Topic.objects.filter(is_active=True).order_by('sort_order_full')))
+        #     Prefetch('topic_set', queryset=Topic.objects.filter(is_active=True).order_by('sort_order_full_dec')))
         
         chapters = chapters.prefetch_related(
-            Prefetch('topic_set', queryset=topics.filter(is_active=True).order_by('sort_order_full').annotate(video_exist=Count('topicvideo'))
+            Prefetch('topic_set', queryset=topics.filter(is_active=True).order_by('sort_order_full_dec').annotate(video_exist=Count('topicvideo'))
         ))
         
         days_for_today, days_per_year = calculate_school_days()  
@@ -177,15 +177,15 @@ class VideosOfTopicView(View):
 
     def find_previous_next_topics(self, course, topic):
         chapters_of_course = Chapter.objects.filter(course=course, is_active=True).distinct()  #всі розділи курсу
-        topics_of_chapters = Topic.objects.filter(chapter__in=chapters_of_course, is_active=True).distinct().order_by("sort_order_full")  #всі теми курсу
+        topics_of_chapters = Topic.objects.filter(chapter__in=chapters_of_course, is_active=True).distinct().order_by("sort_order_full_dec")  #всі теми курсу
         # print(f'всі теми курсу: {topics_of_chapters}')
 
         # print(f'поточна тема: {topic}')
-        topic_pre = topics_of_chapters.filter(sort_order_full__lt=topic.sort_order_full).order_by("sort_order_full").last()  #попередня тема
+        topic_pre = topics_of_chapters.filter(sort_order_full_dec__lt=topic.sort_order_full_dec).order_by("sort_order_full_dec").last()  #попередня тема
         chapter_pre = Chapter.objects.filter(topic=topic_pre).distinct().first()
         # print(f'попередня тема: {topic_pre}')
 
-        topic_next = topics_of_chapters.filter(sort_order_full__gt=topic.sort_order_full).order_by("sort_order_full").first() #наступна тема
+        topic_next = topics_of_chapters.filter(sort_order_full_dec__gt=topic.sort_order_full_dec).order_by("sort_order_full_dec").first() #наступна тема
         chapter_next = Chapter.objects.filter(topic=topic_next).distinct().first()
         # print(f'наступна тема: {topic_next}')
 

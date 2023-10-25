@@ -283,13 +283,15 @@ class Topic(models.Model):
         verbose_name="Виводити",
         default=True,
         )
-    sort_order_full = models.IntegerField(
-        verbose_name="Порядок виводу", 
+    sort_order_full_dec = models.DecimalField(
+        verbose_name = "Порядок виводу",
         help_text="Розраховується автоматично",
+        max_digits=8, # Максимальна кількість цифр, включаючи десяткові
+        decimal_places = 4, # Кількість цифр після десяткової коми
         null=True,
         blank=True,
         editable=False,
-        )
+    )
     slug = models.SlugField(
         verbose_name="slug",
         help_text="заповнюється автоматично",
@@ -304,7 +306,7 @@ class Topic(models.Model):
         return self.chapter.course.title + '-' + self.chapter.title + '-' + self.title
     
     def save(self):
-        self.sort_order_full = self.chapter.sort_order * 1000 + self.sort_order
+        self.sort_order_full_dec = self.chapter.sort_order * 1 + self.sort_order * 0.0001
         super(Topic, self).save()
 
     class Meta:
@@ -614,7 +616,7 @@ class Video(models.Model):
 
     class Meta:
         verbose_name = 'Навчальне відео'
-        verbose_name_plural = '4. Відеотека'
+        verbose_name_plural = '3. Відеотека'
 
 
 
@@ -659,12 +661,12 @@ class TopicVideo(models.Model):
         return self.topic.title+' - '+self.video.title
 
     def save(self):
-        self.title = f"{self.topic.chapter.course.title} - Розділ {self.topic.chapter.title} - Тема {self.topic.title} - Відео {self.video.id}"
+        self.title = f"{self.topic.chapter.course.title} - Розділ {self.topic.chapter.title} - Тема {self.topic.title} - Відео {self.video.title}"
         super(TopicVideo, self).save()
 
     class Meta:
         verbose_name = 'Тема-Відео'
-        verbose_name_plural = '5. Тема-Відео'
+        verbose_name_plural = '4. Тема-Відео'
         unique_together = ('topic', 'video')
 
 
